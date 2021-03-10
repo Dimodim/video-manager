@@ -1,6 +1,6 @@
 <template>
   <div class="nav">
-    <nuxt-link to="/" class="brand">Real World Events</nuxt-link>
+    <router-link to="/" class="brand">Video Manager</router-link>
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link :to="{ name: 'UploadVideos' }">Upload Video</router-link> |
@@ -44,5 +44,8 @@ export default class NavBar extends Vue {}
 }
 .nav a {
   display: inline-block;
+}
+.brand{
+  cursor: default;
 }
 </style>

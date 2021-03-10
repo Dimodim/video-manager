@@ -5,11 +5,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
+// import { VideoService } from '../services/videoService';
 
-@Component({
-  components: {
-  },
-})
-export default class Dashboard extends Vue {}
+@Component
+export default class Dashboard extends Vue {
+  @Prop() private videos!: object;
+}
+
 </script>
