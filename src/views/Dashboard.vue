@@ -5,12 +5,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-// import { VideoService } from '../services/videoService';
+import { Component, Vue } from 'vue-property-decorator';
 
-@Component
+@Component({
+  computed: {
+  },
+})
 export default class Dashboard extends Vue {
-  @Prop() private videos!: object;
+  mounted() {
+    this.$store.dispatch('fetchVideos');
+  }
 }
-
 </script>

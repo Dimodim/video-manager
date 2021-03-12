@@ -1,14 +1,15 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import VideoService from '../services/videoService';
-// import { IVideo } from '../Interfaces/IVideo';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     video: null,
-    videos: null,
+    videos: [],
+    error: null,
+
   },
   mutations: {
     ADD_VIDEO(state, video) {
@@ -17,19 +18,32 @@ export default new Vuex.Store({
     SET_VIDEOS(state, videos) {
       state.videos = videos;
     },
+    SER_ERROR(state, error) {
+      state.error = error;
+    },
   },
   actions: {
     fetchVideos({ commit }) {
       return VideoService.getVideos()
         .then((r: any) => {
           commit('SET_VIDEOS', r.data);
+        }).catch((err) => {
+          commit('SER_ERROR', err.message);
+          throw err;
         });
     },
-    uploadVideos({ commit }, video) {
+    uploadVideo({ commit }, video) {
       return VideoService.uploadVideo(video)
         .then((r: any) => {
           commit('ADD_VIDEO', r.data);
+        }).catch((err) => {
+          commit('SER_ERROR', err.message);
+          throw err;
         });
     },
+  },
+  getters: {
+    getVideos: (state) => state.videos,
+    getVideo: (state) => state.video,
   },
 });

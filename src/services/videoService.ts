@@ -1,22 +1,18 @@
-import { IVideo } from '@/Interfaces/IVideo';
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: 'localhost:1337',
+  baseURL: 'http://localhost:1337',
   withCredentials: false,
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  },
+
 });
 
 export class VideoService {
-  uploadVideo(video: IVideo): any {
-    return apiClient.post('/upload', video);
-  }
+  uploadVideo = (video: FormData) => apiClient.post('/upload', video, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
 
-  getVideos(): any {
-    return apiClient.get('/upload/files');
-  }
+  getVideos = () => apiClient.get('/upload/files');
 }
 export default new VideoService();

@@ -8,22 +8,24 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 
-@Component
-export default class BaseButton extends Vue {
-    @Prop() label!: string;
+@Component({
+  inheritAttrs: false,
 
-    @Prop() value!: any;
+})
+export default class BaseInput extends Vue {
+  @Prop() label!: string;
 
-    //   inheritAttrs: false,
-    listeners() {
-      return {
-        ...this.$listeners,
-        input: this.updateValue,
-      };
-    }
+  @Prop() value: string|number = '';
 
-    updateValue(event: any) {
-      this.$emit('input', event.target.value);
-    }
+  get listeners() {
+    return {
+      ...this.$listeners,
+      input: this.updateValue,
+    };
+  }
+
+  updateValue(event: any) {
+    this.$emit('input', event.target.value);
+  }
 }
 </script>
