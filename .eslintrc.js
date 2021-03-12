@@ -3,6 +3,7 @@ module.exports = {
   env: {
     node: true,
   },
+
   extends: [
     'plugin:vue/essential',
     '@vue/airbnb',
@@ -12,6 +13,7 @@ module.exports = {
     ecmaVersion: 2020,
   },
   rules: {
+    'prefer-destructuring': ['error', { object: true, array: false }],
     'import/no-named-as-default': 0,
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
