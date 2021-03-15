@@ -80,8 +80,10 @@ export default class UploadVideos extends Vue {
   }
 
   onUpload() {
+    const today = new Date().toLocaleDateString();
+    const blob = new Blob([this.video, this.title, this.description, today, { views: 0 }]);
     const formData = new FormData();
-    formData.append('files', this.video, this.video.name);
+    formData.append('files', blob, this.video.name);
     VideoService
       .uploadVideo(formData)
       .then((r) => console.log(r));

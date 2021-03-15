@@ -9,6 +9,7 @@ export default new Vuex.Store({
     video: null,
     videos: [],
     error: null,
+    selectedVideoId: -1,
 
   },
   mutations: {
@@ -18,17 +19,21 @@ export default new Vuex.Store({
     SET_VIDEOS(state, videos) {
       state.videos = videos;
     },
-    SER_ERROR(state, error) {
+    SET_ERROR(state, error) {
       state.error = error;
+    },
+    SET_SELECTED_ID(state, id) {
+      state.selectedVideoId = id;
     },
   },
   actions: {
     fetchVideos({ commit }) {
       return VideoService.getVideos()
         .then((r: any) => {
+          console.log(r);
           commit('SET_VIDEOS', r.data);
         }).catch((err) => {
-          commit('SER_ERROR', err.message);
+          commit('SET_ERROR', err.message);
           throw err;
         });
     },
@@ -37,13 +42,18 @@ export default new Vuex.Store({
         .then((r: any) => {
           commit('ADD_VIDEO', r.data);
         }).catch((err) => {
-          commit('SER_ERROR', err.message);
+          commit('SET_ERROR', err.message);
           throw err;
         });
+    },
+    setDetailsVideoId({ commit }, id) {
+      commit('SET_SELECTED_ID', id);
     },
   },
   getters: {
     getVideos: (state) => state.videos,
     getVideo: (state) => state.video,
+    getNewestVideos: (state) => state.videos.sort((a, b) => a - b).slice(0, 3),
+    getVideoById: (state) => state.videos.find((v: any) => v.id === +state.selectedVideoId),
   },
 });

@@ -25,6 +25,12 @@ const routes: Array<RouteConfig> = [
     name: 'Analytics',
     component: () => import('../views/Analytics.vue'),
   },
+  {
+    path: '/video-details/:id',
+    name: 'VideoDetails',
+    component: () => import('../views/VideoDetails.vue'),
+    props: true,
+  },
 ];
 
 const router = new VueRouter({
