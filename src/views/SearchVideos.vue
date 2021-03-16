@@ -1,24 +1,41 @@
 <template>
     <div>
         <h1>Search Videos</h1>
-
-      <!--<div v-for="video in videos" :key="video.title">
-        <h3 id="video-title">{{video.title}}</h3>
-        <p id="video-description">{{video.title}}</p>
-        <img id="thumbnail" :src="video.thumbnail">
-      </div>-->
+        <SearchForm  v-on:clicked="getVideosByTitle"></SearchForm>
+      <div v-for="video in videos" :key="video.title">
+        <h3 id="video-title">{{video.name}}</h3>
+      </div>
     </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import SearchForm from '../components/SearchForm.vue';
 
-@Component
+@Component({
+  components: {
+    SearchForm,
+  },
+})
 export default class SearchVideos extends Vue {
-  videos!: [];
-
   mounted() {
     this.$store.dispatch('fetchVideos');
+  }
+
+  getVideosByTitle(title: string) {
+    this.$store.dispatch('setSearchField', title);
+  }
+
+  get searchField() {
+    return this.$store.getters.getSearchField;
+  }
+
+  get videos() {
+    return this.$store.getters.getVideos;
+  }
+
+  beforeDestroy() {
+    this.$store.dispatch('clearSearchField');
   }
 }
 </script>

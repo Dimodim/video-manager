@@ -14,5 +14,7 @@ export class VideoService {
   });
 
   getVideos = () => apiClient.get('/upload/files');
+
+  getVideosByTitle = (title: string) => apiClient.get(`/upload/files/${title}`);
 }
 export default new VideoService();

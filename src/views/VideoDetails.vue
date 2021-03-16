@@ -14,6 +14,7 @@ export default class VideoDetails extends Vue {
   @Prop() id!: number;
 
   mounted() {
+    this.$store.dispatch('fetchVideos');
     this.$store.dispatch('setDetailsVideoId', this.id);
   }
 

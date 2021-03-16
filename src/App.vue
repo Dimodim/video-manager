@@ -13,7 +13,11 @@ import NavBar from './components/NavBar.vue';
     NavBar,
   },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  moubnted() {
+    this.$store.dispatch('fetchVideos');
+  }
+}
 </script>
 <style>
 #app {

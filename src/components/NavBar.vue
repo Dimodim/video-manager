@@ -4,7 +4,7 @@
     <div id="nav">
       <router-link to="/">Dashboard</router-link> |
       <router-link :to="{ name: 'UploadVideos' }">Upload Video</router-link> |
-      <router-link :to="{ name: 'SearchVideos' }">Search Videos</router-link> |
+      <router-link :to="{ name: 'SearchVideos'}">Search Videos</router-link> |
       <router-link :to="{ name: 'Analytics' }">Analytics</router-link>
     </div>
   </div>
