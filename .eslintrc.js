@@ -13,6 +13,8 @@ module.exports = {
     ecmaVersion: 2020,
   },
   rules: {
+    semi: 'off',
+    'no-extra-semi': 'off',
     'prefer-destructuring': ['error', { object: true, array: false }],
     'import/no-named-as-default': 0,
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',

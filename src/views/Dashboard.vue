@@ -25,15 +25,15 @@ export default class Dashboard extends Vue {
   routeToSearchVideos = (title: string) => {
     this.$store.dispatch('setSearchField', title);
     this.$router.push({ path: '/search' });
-  }
+  };
 
   routeToVideoDetails = (video: any) => {
     this.$router.push({ path: `/video-details/${video.id}`, params: { id: video.id } });
-  }
+  };
 
   get videos() {
     return this.$store.getters.getNewestVideos;
-  }
+  };
 }
 </script>
 <style scoped>
