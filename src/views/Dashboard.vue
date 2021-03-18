@@ -20,6 +20,7 @@ import SearchForm from '../components/SearchForm.vue';
 export default class Dashboard extends Vue {
   mounted() {
     this.$store.dispatch('fetchVideos');
+    this.$store.dispatch('fetchVideosWithAnalytics');
   }
 
   routeToSearchVideos = (title: string) => {
